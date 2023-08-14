@@ -8,7 +8,7 @@ import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 const fs = require("fs");
 const APP_PORT = 3000;
-const APP_HOST = "localhost";
+const APP_HOST = "localhost"; //
 const GOOGLE_MAILER_CLIENT_ID =
   "185101515936-p4oppj9l3sphf9f91o80l0ugpevkbdee.apps.googleusercontent.com";
 const GOOGLE_MAILER_CLIENT_SECRET = "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";
