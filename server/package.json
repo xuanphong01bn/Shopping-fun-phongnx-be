@@ -1,0 +1,38 @@
+{
+  "name": "server",
+  "type": "commonjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec ./node_modules/.bin/babel-node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.35.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "1.1.4",
+    "express-jwt": "^8.4.1",
+    "firebase-admin": "9.1.1",
+    "fs": "^0.0.1-security",
+    "google-auth-library": "^8.8.0",
+    "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
+    "mongoose": "^7.1.1",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.3",
+    "nodemon": "^2.0.21",
+    "slugify": "^1.6.6",
+    "socket.io": "^4.7.1",
+    "stripe": "^12.8.0"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.20.7"
+  }
+}
