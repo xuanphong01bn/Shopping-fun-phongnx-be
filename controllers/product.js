@@ -164,7 +164,7 @@ const productStar = async (req, res) => {
 const handleQuery = async (req, res, body) => {
   // const result = await Product.createIndex({ description: "text" });
   // console.log(`Index created: ${result}`);
-  const { text, price, categoryList, brand } = body;
+  const { text, price, categoryList, brand, sortPrice } = body;
   console.log("price :", price);
   const filterObject = {
     // $text: { $search: text },
@@ -182,9 +182,19 @@ const handleQuery = async (req, res, body) => {
     delete filterObject.category;
   if (brand == undefined || brand?.length == 0) delete filterObject.brand;
   console.log("filter object :", filterObject);
+  const filterSort = {
+    price:
+      sortPrice == "Cao-Thấp"
+        ? "desc"
+        : sortPrice == "Thấp-Cao"
+        ? "asc"
+        : undefined,
+  };
+  if (sortPrice == "undefined") delete filterSort.price;
   const products = await Product.find(filterObject)
     .populate("category", "_id name")
     .populate("subs", "_id name")
+    .sort(filterSort)
     // .populate("postedBy", "_id name")
     .exec();
   res.json(products);

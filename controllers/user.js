@@ -110,8 +110,13 @@ const getAllUser = async (req, res) => {
 
 const userDeleteOrder = async (req, res) => {
   const { idOrder } = req?.body;
-  await Order.deleteMany({ _id: idOrder });
-  res.json("Đã xoá đơn hàng");
+  // await Order.deleteMany({ _id: idOrder });
+  await Order.findOneAndUpdate(
+    { _id: idOrder }, // Điều kiện tìm kiếm
+    { orderStatus: "Cancelled" }, // Dữ liệu mới cập nhật
+    { new: true }
+  );
+  res.json("Đã huỷ đơn hàng");
 };
 module.exports = {
   userCart: userCart,
