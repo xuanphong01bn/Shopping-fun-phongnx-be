@@ -20,7 +20,7 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: "https://slug-panel.onrender.com",
+    origin: "https://phongnx-shopping-fun-be.onrender.com",
     headers: ["Content-Type"],
     credentials: true,
   })
