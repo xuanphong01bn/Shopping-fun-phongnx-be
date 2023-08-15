@@ -39,8 +39,8 @@ router.post(
   updateSoldAndStockProduct
 );
 
-router.get("/admin/top-user-order", topOrder);
+router.get("/admin/top-user-order", authCheck, adminCheck, topOrder);
 
-router.get("/admin/user-by-id/:idUser", getUserById);
+router.get("/admin/user-by-id/:idUser", authCheck, adminCheck, getUserById);
 
 module.exports = router;
