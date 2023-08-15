@@ -43,8 +43,12 @@ const updateWishlist = async (req, res) => {
   );
   res.json("Update done");
 };
+const hehe = async (req, res) => {
+  return res.json("hehe");
+};
 module.exports = {
   getWishList,
   createList,
   updateWishlist,
+  hehe,
 };

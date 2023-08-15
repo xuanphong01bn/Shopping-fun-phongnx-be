@@ -15,5 +15,8 @@ import {
 router.post("/wishlist", authCheck, createList);
 router.get("/wishlist/:userId", authCheck, getWishList);
 router.post("/wishlist-update", authCheck, updateWishlist);
+router.get("/hehe", async (req, res) => {
+  return res.json("hehe");
+});
 
 module.exports = router;
