@@ -10,6 +10,7 @@ import {
   emptyUserCart,
   getUserOrder,
   getAllUser,
+  userDeleteOrder,
 } from "../controllers/user";
 
 // router.get("/user", (req, res) => {
@@ -25,6 +26,8 @@ router.delete("/user/cart", authCheck, emptyUserCart);
 
 router.post("/user/order", authCheck, createOrder);
 
-router.get("/user/order", authCheck, getUserOrder);
+router.get("/user/order/:status", authCheck, getUserOrder);
+
+router.post("/user/delete-order", authCheck, userDeleteOrder);
 
 module.exports = router;

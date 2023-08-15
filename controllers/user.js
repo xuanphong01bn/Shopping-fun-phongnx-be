@@ -87,8 +87,17 @@ const emptyUserCart = async (req, res) => {
 };
 
 const getUserOrder = async (req, res) => {
+  const status = req?.params?.status;
   const user = await User.findOne({ email: req.user.email });
-  const userOrders = await Order.find({ orderedBy: user?._id })
+  const filter =
+    status == "all"
+      ? {
+          orderedBy: user?._id,
+        }
+      : {
+          orderStatus: status != "all" && status,
+        };
+  const userOrders = await Order.find(filter)
     .sort({ createdAt: -1 })
     .populate("products.product");
   res.json(userOrders);
@@ -98,11 +107,18 @@ const getAllUser = async (req, res) => {
   const user = await User.find({});
   res.json(user);
 };
+
+const userDeleteOrder = async (req, res) => {
+  const { idOrder } = req?.body;
+  await Order.deleteMany({ _id: idOrder });
+  res.json("Đã xoá đơn hàng");
+};
 module.exports = {
   userCart: userCart,
   getUserCart: getUserCart,
   createOrder: createOrder,
   emptyUserCart: emptyUserCart,
   getUserOrder: getUserOrder,
+  userDeleteOrder,
   getAllUser,
 };

@@ -39,7 +39,25 @@ const updateStatus = async (req, res) => {
 };
 
 const getAllOrderAdmin = async (req, res) => {
-  const userOrders = await Order.find({})
+  const { status, time } = req?.body;
+  var start = new Date(time?.[0]);
+  var end = new Date(time?.[1]);
+  const filter = {
+    orderStatus: status,
+    createdAt: {
+      $gte: start,
+      $lte: end,
+    },
+  };
+  if (status == "all") delete filter.orderStatus;
+  if (
+    !time?.[0] ||
+    !time?.[1] ||
+    time?.[0] == "undefined" ||
+    time?.[1] == "undefined"
+  )
+    delete filter.createdAt;
+  const userOrders = await Order.find(filter)
     .sort({ createdAt: -1 })
     .populate("products.product")
     .populate("orderedBy");
@@ -208,6 +226,76 @@ const updateSoldAndStockProduct = async (req, res) => {
 
   res.json("update sold done");
 };
+const topOrder = async (req, res) => {
+  const top = await Order.aggregate([
+    {
+      $match: {
+        orderStatus: "Completed",
+      },
+    },
+    {
+      $group: {
+        _id: "$orderedBy",
+        totalOrders: { $sum: 1 },
+      },
+    },
+    {
+      $sort: {
+        totalOrders: -1,
+      },
+    },
+    {
+      $limit: 5,
+    },
+  ]);
+  // const top = Order.aggregate([
+  //   {
+  //     $lookup: {
+  //       from: "User", // Tên của bảng User
+  //       localField: "orderedBy",
+  //       foreignField: "_id",
+  //       as: "user",
+  //     },
+  //   },
+  //   {
+  //     $match: {
+  //       orderStatus: "Completed",
+  //     },
+  //   },
+  //   {
+  //     $unwind: "$user",
+  //   },
+  //   {
+  //     $group: {
+  //       _id: "$orderedBy",
+  //       name: { $first: "$user.name" },
+  //       totalOrders: { $sum: 1 },
+  //     },
+  //   },
+  //   {
+  //     $sort: {
+  //       totalOrders: -1,
+  //     },
+  //   },
+  //   {
+  //     $limit: 5,
+  //   },
+  //   {
+  //     $project: {
+  //       _id: 0,
+  //       name: 1,
+  //       totalOrders: 1,
+  //     },
+  //   },
+  // ]);
+  res.json(top);
+};
+
+const getUserById = async (req, res) => {
+  const idUser = req?.params?.idUser;
+  const user = await User.find({ _id: idUser });
+  res.json(user);
+};
 module.exports = {
   updateStatus: updateStatus,
   getAllOrderAdmin: getAllOrderAdmin,
@@ -217,4 +305,6 @@ module.exports = {
   revenue,
   updateSoldAndStockProduct,
   getDetailOrderAdmin,
+  topOrder,
+  getUserById,
 };

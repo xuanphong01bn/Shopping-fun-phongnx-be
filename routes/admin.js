@@ -12,6 +12,8 @@ import {
   revenue,
   updateSoldAndStockProduct,
   getDetailOrderAdmin,
+  topOrder,
+  getUserById,
 } from "../controllers/admin";
 import { productGoodSales } from "../controllers/product";
 router.post(
@@ -21,7 +23,7 @@ router.post(
   updateStatus
 );
 
-router.get("/admin/order", authCheck, adminCheck, getAllOrderAdmin);
+router.post("/admin/order", authCheck, adminCheck, getAllOrderAdmin);
 router.get("/admin/order/:orderId", getDetailOrderAdmin);
 
 router.post("/admin/email/send", authCheck, adminCheck, sendEmailAdmin);
@@ -36,5 +38,9 @@ router.post(
   adminCheck,
   updateSoldAndStockProduct
 );
+
+router.get("/admin/top-user-order", topOrder);
+
+router.get("/admin/user-by-id/:idUser", getUserById);
 
 module.exports = router;

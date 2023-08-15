@@ -20,9 +20,8 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: "http://phongnx-shopping-fun-be.onrender.com",
-    // headers: ["Content-Type"],
-    // credentials: true,
+    origin: "https://graduation-project-nine.vercel.app",
+    credentials: true,
   })
 );
 
