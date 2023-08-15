@@ -45,7 +45,7 @@ const updateWishlist = async (req, res) => {
 };
 const hehe = async (req, res) => {
   return res.json("hehe");
-};
+}; //
 module.exports = {
   getWishList,
   createList,
