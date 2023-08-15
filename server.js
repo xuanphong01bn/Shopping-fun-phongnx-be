@@ -20,9 +20,9 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: "https://phongnx-shopping-fun-be.onrender.com",
-    headers: ["Content-Type"],
-    credentials: true,
+    origin: "http://phongnx-shopping-fun-be.onrender.com",
+    // headers: ["Content-Type"],
+    // credentials: true,
   })
 );
 
