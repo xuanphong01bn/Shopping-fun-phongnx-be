@@ -17,7 +17,14 @@ const { Server } = require("socket.io");
 
 // app
 const app = express();
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: "https://slug-panel.onrender.com",
+    headers: ["Content-Type"],
+    credentials: true,
+  })
+);
 
 //db
 mongoose
