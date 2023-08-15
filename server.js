@@ -21,7 +21,10 @@ app.use(cors());
 
 //db
 mongoose
-  .connect(process.env.DATABASE, {})
+  .connect(
+    "mongodb+srv://donhatphong94:942001SP@cluster0.agqfpaq.mongodb.net/?retryWrites=true&w=majority",
+    {}
+  )
   .then(() => console.log("DB connected"))
   .catch((err) => {
     console.log("no database connect");
